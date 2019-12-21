@@ -7,7 +7,6 @@ class Migration(migrations.Migration):
 
     def copy_owners_to_owner(apps, schema_editor):
         Flat = apps.get_model('property', 'Flat')
-        Owner = apps.get_model('property', 'Owner')
         for owner in Flat.objects.all():
             Owner.objects.get_or_create(owner=owner.owner,
                                         owners_phonenumber=owner.owners_phonenumber,
