@@ -24,8 +24,8 @@ class Flat(models.Model):
 
 
 class Complaint(models.Model):
-    complainer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="complainer", verbose_name="Кто жаловался")
-    intruder = models.ForeignKey(Flat, verbose_name="Квартира, на которую пожаловались", related_name="intruder", on_delete=models.CASCADE)
+    complainer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="intruders", verbose_name="Кто жаловался")
+    intruder = models.ForeignKey(Flat, verbose_name="Квартира, на которую пожаловались", related_name="complainers", on_delete=models.CASCADE)
     text = models.TextField(verbose_name="Текст жалобы", blank=True)
 
 
