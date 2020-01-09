@@ -11,7 +11,9 @@ class Migration(migrations.Migration):
         for owner in Owner.objects.all():
             print(owner)
             flats = Flat.objects.filter(owner=owner.owner)
-            owner.owner_flats.add(*[flats])
+            for flat in flats:
+                print(flat)
+                owner.owner_flats.add(*[flat])
 
     dependencies = [
         ('property', '0011_auto_20191202_1746'),
