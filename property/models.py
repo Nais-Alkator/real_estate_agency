@@ -18,14 +18,14 @@ class Flat(models.Model):
     active = models.BooleanField("Активно-ли объявление", db_index=True)
     construction_year = models.IntegerField("Год постройки здания", null=True, blank=True, db_index=True)
     new_building = models.NullBooleanField("Новостройка", blank=True, db_index=True)
-    liked_by = models.ManyToManyField(User, blank=True, verbose_name="Кто лайкнул")
+    liked_by = models.ManyToManyField(User, blank=True, verbose_name="Кто лайкнул", related_name="likes")
     def __str__(self):
         return f"{self.town}, {self.address} ({self.price}р.)"
 
 
 class Complaint(models.Model):
-    complainer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="intruders", verbose_name="Кто жаловался")
-    intruder = models.ForeignKey(Flat, verbose_name="Квартира, на которую пожаловались", related_name="complainers", on_delete=models.CASCADE)
+    complainer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="complainers", verbose_name="Кто жаловался")
+    intruder = models.ForeignKey(Flat, verbose_name="Квартира, на которую пожаловались", related_name="intruders", on_delete=models.CASCADE)
     text = models.TextField(verbose_name="Текст жалобы", blank=True)
 
 
